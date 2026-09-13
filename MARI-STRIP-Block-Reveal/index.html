@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#090512" />
+  <meta name="description" content="MARI STRIP: Block Reveal — clear blocks, reveal art, and build your collection." />
+  <title>MARI STRIP: Block Reveal</title>
+  <link rel="preload" href="assets/stage-01.png" as="image" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090512'/%3E%3Cpath d='M13 15h14v14H13zm17 0h14v14H30zm0 17h14v14H30zm17 0h14v14H47z' fill='%23ff35c8'/%3E%3Cpath d='M13 32h14v14H13z' fill='%237c4dff'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <button class="brand" data-view="home" aria-label="MARI STRIP home">
+        <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+        <span><b>MARI STRIP</b><small>BLOCK REVEAL</small></span>
+      </button>
+      <div class="top-actions">
+        <button class="icon-btn" data-view="album" aria-label="Open album">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Zm3 11 3.2-4 2.4 2.8 1.8-2.1L17 16.5H7ZM8.5 9A1.5 1.5 0 1 0 8.5 6a1.5 1.5 0 0 0 0 3Z"/></svg>
+        </button>
+        <div class="wallet-pill"><span></span><strong>0</strong> MARI</div>
+      </div>
+    </header>
+
+    <section id="home" class="view active">
+      <div class="home-art">
+        <div class="art-shade"></div>
+        <div class="hero-content">
+          <div class="eyebrow">MARIMANIACS ORIGINAL GAME</div>
+          <h1>DROP.<br><em>REVEAL.</em><br>COLLECT.</h1>
+          <p>Clear lines to reveal exclusive character art.</p>
+          <div class="hero-actions">
+            <button id="playBtn" class="primary-btn">START UNDRESSING <span>→</span></button>
+            <button id="selectStageBtn" class="secondary-btn">SELECT STAGE</button>
+          </div>
+        </div>
+        <button class="stage-preview" id="stagePreview">
+          <span class="mini-label">STAGE 01</span>
+          <span class="mini-title">LUCKY BUNNY</span>
+          <span class="mini-go">PLAY</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="game" class="view">
+      <div class="game-wrap">
+        <div class="game-bg"></div>
+        <div id="veil" class="veil"></div>
+        <div class="game-hud">
+          <button class="back-btn" data-view="home" aria-label="Back">‹</button>
+          <div><small id="gameStage">STAGE 01</small><b id="gameTitle">LUCKY BUNNY</b></div>
+          <button id="pauseBtn" class="pause-btn" aria-label="Pause">Ⅱ</button>
+        </div>
+        <div class="stats">
+          <div><small>SCORE</small><strong id="score">000000</strong></div>
+          <div class="goal"><small>REVEAL</small><strong><span id="lines">0</span>/5 LINES</strong><i><span id="progress"></span></i></div>
+          <div><small>LEVEL</small><strong id="level">01</strong></div>
+        </div>
+        <div class="board-shell">
+          <canvas id="board" width="300" height="540" aria-label="MARI STRIP game board"></canvas>
+          <div class="next-box"><small>NEXT</small><canvas id="next" width="72" height="72"></canvas></div>
+        </div>
+        <div class="controls" aria-label="Game controls">
+          <button data-move="left" aria-label="Move left">←</button>
+          <button data-move="down" aria-label="Move down">↓</button>
+          <button class="rotate" data-move="rotate" aria-label="Rotate">↻</button>
+          <button data-move="right" aria-label="Move right">→</button>
+          <button class="drop" data-move="drop" aria-label="Drop">DROP</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="album" class="view album-view">
+      <div class="section-heading">
+        <div><span class="eyebrow">YOUR COLLECTION</span><h2>ALBUM</h2></div>
+        <strong id="albumCount">0 / 3</strong>
+      </div>
+      <div id="albumGrid" class="album-grid">
+        <article class="album-card locked" data-album="1">
+          <img src="assets/stage-01.png" alt="Neon Bloom character illustration" />
+          <div class="album-lock"><span>◆</span><b>LOCKED</b><small>CLEAR STAGE 01</small></div>
+          <div class="album-caption"><small>NO. 001</small><b>LUCKY BUNNY</b></div>
+        </article>
+        <article class="album-card locked" data-album="2"><img src="assets/stage-02.png" alt="High Roller character illustration" /><div class="album-lock"><span>◆</span><b>LOCKED</b><small>CLEAR STAGE 02</small></div><div class="album-caption"><small>NO. 002</small><b>HIGH ROLLER</b></div></article>
+        <article class="album-card locked" data-album="3"><img src="assets/stage-03.png" alt="Jackpot Heat character illustration" /><div class="album-lock"><span>◆</span><b>LOCKED</b><small>CLEAR STAGE 03</small></div><div class="album-caption"><small>NO. 003</small><b>JACKPOT HEAT</b></div></article>
+        <article class="album-card locked" data-album="4"><img src="assets/stage-04.png" alt="Royal Flush character illustration" /><div class="album-lock"><span>◆</span><b>LOCKED</b><small>CLEAR STAGE 04</small></div><div class="album-caption"><small>NO. 004</small><b>ROYAL FLUSH</b></div></article>
+      </div>
+    </section>
+  </main>
+
+  <div id="startModal" class="modal">
+    <div class="modal-card">
+      <span id="modalStage" class="eyebrow">STAGE 01</span>
+      <h2 id="modalTitle">LUCKY BUNNY</h2>
+      <p>Clear <strong>5 lines</strong> to reveal and collect this illustration.</p>
+      <div class="control-tip"><span>← ↓ →</span> MOVE <span>↻</span> ROTATE <span>DROP</span></div>
+      <button id="startGame" class="primary-btn">START GAME</button>
+      <button id="closeModal" class="text-btn">NOT YET</button>
+    </div>
+  </div>
+
+  <div id="stageSelectModal" class="modal stage-select-modal">
+    <div class="stage-select-card">
+      <div class="stage-select-head"><div><span class="eyebrow">CHOOSE YOUR REVEAL</span><h2>SELECT STAGE</h2></div><button id="closeStageSelect" aria-label="Close">×</button></div>
+      <div class="home-nav">
+        <button class="nav-card" data-stage="1"><span>01</span><b>LUCKY<br>BUNNY</b><small>FREE</small></button>
+        <button class="nav-card" data-stage="2"><span>02</span><b>HIGH<br>ROLLER</b><small>FREE</small></button>
+        <button class="nav-card" data-stage="3"><span>03</span><b>JACKPOT<br>HEAT</b><small>FREE</small></button>
+        <button class="nav-card gate" data-stage="4"><span>04</span><b>ROYAL<br>FLUSH</b><small>HOLD 1,000 MARI</small></button>
+      </div>
+      <p class="stage-legend"><i class="done-dot"></i> CLEARED <i class="ready-dot"></i> READY <i class="lock-dot"></i> LOCKED</p>
+    </div>
+  </div>
+
+  <div id="walletModal" class="modal">
+    <div class="modal-card">
+      <span class="eyebrow">MARI HOLDER GATE</span>
+      <h2>1,000 MARI REQUIRED</h2>
+      <p>Connect your Solana wallet. Your tokens stay in your wallet—we only check the balance.</p>
+      <div class="balance-readout"><small>REQUIRED BALANCE</small><strong>1,000 MARI</strong></div>
+      <button id="connectWallet" class="primary-btn">CONNECT WALLET</button>
+      <p id="walletStatus" class="wallet-status"></p>
+      <button id="closeWallet" class="text-btn">GO BACK</button>
+    </div>
+  </div>
+
+  <div id="noticeModal" class="modal">
+    <div class="modal-card compact">
+      <span class="eyebrow">STAGE LOCKED</span>
+      <h2 id="noticeTitle">CLEAR THE PREVIOUS STAGE</h2>
+      <p id="noticeText">Complete the previous stage to continue undressing MARI.</p>
+      <button id="closeNotice" class="primary-btn">GOT IT</button>
+    </div>
+  </div>
+
+  <div id="albumPreview" class="modal image-preview">
+    <button id="closePreview" class="preview-close" aria-label="Close image">×</button>
+    <img id="previewImage" src="assets/stage-01.png" alt="Unlocked MARI illustration" />
+    <div class="preview-caption"><small id="previewStage">STAGE 01</small><strong id="previewTitle">LUCKY BUNNY</strong></div>
+  </div>
+
+  <div id="pauseOverlay" class="modal">
+    <div class="modal-card compact"><span class="eyebrow">GAME PAUSED</span><h2>TAKE A BREATH</h2><button id="resumeBtn" class="primary-btn">RESUME</button><button class="text-btn" data-view="home">QUIT STAGE</button></div>
+  </div>
+
+  <div id="clearOverlay" class="modal clear-modal">
+    <div class="clear-card">
+      <span class="spark">✦</span><small>ILLUSTRATION UNLOCKED</small><h2 id="clearTitle">LUCKY BUNNY</h2><p class="album-saved">Saved! You can view the original in My Album.</p>
+      <div class="unlocked-art"><img id="clearImage" src="assets/stage-01.png" alt="Unlocked character illustration" /></div>
+      <div id="clearMessage" class="flirt-bubble">Want to undress MARI a little more?</div>
+      <button id="nextStageBtn" class="primary-btn">PLAY NEXT STAGE →</button>
+      <button id="viewAlbum" class="text-btn">VIEW IN MY ALBUM</button>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
